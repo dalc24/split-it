@@ -1,9 +1,8 @@
-import user.Expense;
-import user.User;
+package user.GUI;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) {
+        // Create an instance of UserHomePage
         UserHomePage homePage = new UserHomePage();
         
         // Call the method to create and show the window
@@ -30,11 +29,14 @@ public class App {
         System.out.println("Expense: " + alice.getUserTotal());
         System.out.println("People owed: " + alice.getNamesOwed());
 
-        expense.payExpense(alice, 40);
+        expense.payExpense(alice, 50);
         System.out.println("Alice pays");
         System.out.println("How much owed: " + expense.getUserOwedAmounts());
         System.out.println("Expense: " + alice.getUserTotal());
-        System.out.println("People owed: " + alice.getNamesOwed()); */
+        System.out.println("People owed: " + alice.getNamesOwed());
+
+        System.out.println("How much owed: " + expense.getUserOwedAmounts()); */
+
 
 
 
