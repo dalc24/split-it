@@ -24,6 +24,10 @@ public class Expense {
 
     }
 
+    public String getPurpose() {
+        return purpose;
+    }
+
     public int getExpenseAmount() {
         return amount;
     }

@@ -4,7 +4,8 @@ import user.User;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        UserHomePage homePage = new UserHomePage();
+        User bob = new User("Bob");
+        UserHomePage homePage = new UserHomePage(bob);
         
         // Call the method to create and show the window
         homePage.createAndShowWindow();
