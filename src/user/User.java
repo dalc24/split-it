@@ -4,8 +4,8 @@ import java.util.*;
 
 public class User {
     private String userName;
-    private int moneyTotal;
-    private Map<String, Integer> peopleList;
+    private float moneyTotal;
+    private Map<String, Float> peopleList;
 
     public User(String name) {
         this.userName = name;
@@ -18,7 +18,7 @@ public class User {
         return userName;
     }
     /* gets total amount owed */
-    public int getUserTotal() {
+    public float getUserTotal() {
         return moneyTotal;
     }
 
@@ -30,7 +30,7 @@ public class User {
         return new ArrayList<>();
     }
 
-    public int getAmountOwedtoName(String name){
+    public float getAmountOwedtoName(String name){
         if (!peopleList.isEmpty()) {
             return peopleList.get(name);
         }
@@ -38,25 +38,25 @@ public class User {
     }
 
     /* adds to total expense */
-    public void addExpense(int amount) {
+    public void addExpense(float amount) {
         moneyTotal += amount;
     }
 
     /* subtracts from total expense */
-    public void paidExpense(int amount) {
+    public void paidExpense(float amount) {
         moneyTotal -= amount;
     }
 
     /* adds person to persons owed and amount owed */
-    public void addOwed(String name, int amount) {
+    public void addOwed(String name, float amount) {
 
 
         if (peopleList.get(name) == null) {
             peopleList.put(name, amount);
         }
         else {
-            int oldAmount = peopleList.get(name);
-            int newAmount = oldAmount + amount;
+            float oldAmount = peopleList.get(name);
+            float newAmount = oldAmount + amount;
             peopleList.replace(name, newAmount);
         }
         addExpense(amount);
@@ -64,8 +64,8 @@ public class User {
 
 
     /* subtracts amount that was owed, delete person to owe */
-    public void clearOwed(String name, int amount) {
-        int debtTotal = peopleList.get(name);
+    public void clearOwed(String name, float amount) {
+        float debtTotal = peopleList.get(name);
         debtTotal -= amount;
 
         if (debtTotal == 0) {

@@ -46,7 +46,7 @@ class Header extends JPanel {
 
         String amountColor = "";
 
-        int userAmountTotal = user.getUserTotal();
+        float userAmountTotal = user.getUserTotal();
 
         if (userAmountTotal > 0) {
             amountColor = negativeAmount;
@@ -96,7 +96,7 @@ class UsersOwedBox extends JPanel {
             personPanel.setMaximumSize(new Dimension(460, 40)); // Ensures height doesn't exceed this
 
             // Get the amount owed to this person
-            int amountOwed = user.getAmountOwedtoName(name);
+            float amountOwed = user.getAmountOwedtoName(name);
 
             // Create a label for the name
             JLabel nameLabel = new JLabel(name);
@@ -113,6 +113,20 @@ class UsersOwedBox extends JPanel {
             personPanel.add(Box.createHorizontalGlue()); // Pushes the amount label to the right
             personPanel.add(amountLabel);
             personPanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add padding to the right
+
+            // Add a MouseListener to make the panel clickable
+            personPanel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // Show details in a popup when the panel is clicked
+                    JOptionPane.showMessageDialog(
+                        personPanel,
+                        "Details for " + name + ":\nAmount Owed: $" + amountOwed,
+                        "Details for " + name,
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+            });
 
             // Add the person panel to the main panel
             this.add(personPanel);

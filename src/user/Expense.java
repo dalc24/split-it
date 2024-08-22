@@ -4,16 +4,16 @@ import java.util.*;
 public class Expense {
     private User userPaid;
     private User[] usersOwe; 
-    private int amount;
+    private float amount;
     private String purpose; 
-    private int partySize;
-    private Map<String, Integer> userOwedAmounts;
+    private float partySize;
+    private Map<String, Float> userOwedAmounts;
     private int month;
     private int date;
 
-    private int statusPaid;
+    private float statusPaid;
 
-    public Expense(User user, User[] users, int amount, String purpose, String typeSplit, int month, int date) {
+    public Expense(User user, User[] users, float amount, String purpose, String typeSplit, int month, int date) {
         this.userPaid = user;
         this.usersOwe = users;
         this.amount = amount;
@@ -34,7 +34,7 @@ public class Expense {
         return purpose;
     }
 
-    public int getExpenseAmount() {
+    public float getExpenseAmount() {
         return amount;
     }
 
@@ -42,11 +42,11 @@ public class Expense {
         return userPaid.getName();
     }
 
-    public int getMonth() {
+    public float getMonth() {
         return month;
     }
 
-    public int getDate() throws Exception {
+    public float getDate() throws Exception {
 
         ArrayList<Integer> months31 = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 8, 10, 12));
         ArrayList<Integer> months30 = new ArrayList<>(Arrays.asList(4, 6, 9, 11));
@@ -79,28 +79,28 @@ public class Expense {
         return usersInvolved;
     }
 
-    public int getPartySize() {
+    public float getPartySize() {
         return partySize;
     }
 
     public void equalSplit() {
-        int splitAmount = amount / partySize;
+        float splitAmount = amount / partySize;
 
         //System.out.println(splitAmount);
 
         for (User user : usersOwe) {
             user.addOwed(userPaid.getName(), splitAmount);
-            userOwedAmounts.put(user.getName(), userOwedAmounts.getOrDefault(userOwedAmounts, 0) + splitAmount);
+            userOwedAmounts.put(user.getName(), userOwedAmounts.getOrDefault(userOwedAmounts, 0f) + splitAmount);
 
         }
     }
 
-    public Map<String, Integer> getUserOwedAmounts() {
+    public Map<String, Float> getUserOwedAmounts() {
         return new HashMap<>(userOwedAmounts);
     }
 
-    public void payExpense(User user, int amount) {
-        int userOwes = userOwedAmounts.get(user.getName());
+    public void payExpense(User user, float amount) {
+        float userOwes = userOwedAmounts.get(user.getName());
         userOwes -= amount;
 
         userOwedAmounts.replace(user.getName(), userOwes);
