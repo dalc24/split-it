@@ -17,10 +17,14 @@ public class Expense {
         this.usersOwe = users;
         this.amount = amount;
         this.purpose = purpose;
-        this.partySize = users.length;
+        this.partySize = 1 + users.length;
         this.typeSplit = typeSplit;
         this.statusPaid = amount;
         this.userOwedAmounts = new HashMap<>();
+
+        if (typeSplit == "equal" || typeSplit == "Equal") {
+            equalSplit();
+        }
 
     }
 
@@ -48,20 +52,15 @@ public class Expense {
         return partySize;
     }
 
-    public void equalSplit(String typeSplit) {
+    public void equalSplit() {
+        int splitAmount = amount / partySize;
 
-        String type = typeSplit;
-        if (type == "equal" || type == "Equal") {
+        //System.out.println(splitAmount);
 
-            int splitAmount = amount / partySize;
+        for (User user : usersOwe) {
+            user.addOwed(userPaid.getName(), splitAmount);
+            userOwedAmounts.put(user.getName(), userOwedAmounts.getOrDefault(userOwedAmounts, 0) + splitAmount);
 
-            //System.out.println(splitAmount);
-
-            for (User user : usersOwe) {
-                user.addOwed(getUserPaid(), splitAmount);
-                userOwedAmounts.put(user.getName(), userOwedAmounts.getOrDefault(userOwedAmounts, 0) + splitAmount);
-
-            }
         }
     }
 
@@ -77,7 +76,7 @@ public class Expense {
         statusPaid -= amount;
 
         //edits to User
-        user.clearOwed(userPaid.getName(), amount);
+        user.clearOwed(user.getName(), amount);
         
     }
 

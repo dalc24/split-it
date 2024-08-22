@@ -5,17 +5,36 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         User bob = new User("Bob");
-        UserHomePage homePage = new UserHomePage(bob);
+        User alice = new User("Alice");
+        User charlie = new User("Charlie");
+        User[] participants = {alice, charlie};
+        Expense expense = new Expense(bob, participants, 150, "Dinner", "Equal");
+
+        User[] participants2 = {alice, bob};
+        Expense expense2 = new Expense(charlie, participants2, 9, "Candy", "equal");
+
+        //expense.payExpense(alice, 20);
+        System.out.println("Aliie owes bob: " + alice.getAmountOwedtoName("Bob"));
+
+        User robert = new User("Robert");
+        User sasha = new User("Sasha");
+        User kate = new User("Kate");
+
+        User[] participants3 = {alice, bob, robert, charlie, kate};
+        Expense rent = new Expense(sasha, participants3, 750, "rent", "equal");
+
+        Expense lunch = new Expense(bob, participants, 9, "for funzies", "equal");
+
+        alice.clearOwed("Sasha", 125);
+
+
+
+        UserHomePage homePage = new UserHomePage(alice);
         
         // Call the method to create and show the window
         homePage.createAndShowWindow();
        
-       /* User bob = new User("Bob");
-        User alice = new User("Alice");
-        User charlie = new User("Charlie");
-        User[] participants = {alice, charlie};
-        Expense expense = new Expense(bob, participants, 100, "Dinner", "Equal");
-
+/* 
         System.out.println();
         System.out.println("User Paid: " + expense.getUserPaid());
         System.out.println("Expense Amount: " + expense.getExpenseAmount());

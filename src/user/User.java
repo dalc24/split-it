@@ -1,5 +1,5 @@
 package user;
-import java.util.*;  
+import java.util.*;
 
 
 public class User {
@@ -30,6 +30,13 @@ public class User {
         return new ArrayList<>();
     }
 
+    public int getAmountOwedtoName(String name){
+        if (!peopleList.isEmpty()) {
+            return peopleList.get(name);
+        }
+        return 0;
+    }
+
     /* adds to total expense */
     public void addExpense(int amount) {
         moneyTotal += amount;
@@ -42,9 +49,19 @@ public class User {
 
     /* adds person to persons owed and amount owed */
     public void addOwed(String name, int amount) {
-        peopleList.put(name, peopleList.getOrDefault(peopleList, 0) + amount);
+
+
+        if (peopleList.get(name) == null) {
+            peopleList.put(name, amount);
+        }
+        else {
+            int oldAmount = peopleList.get(name);
+            int newAmount = oldAmount + amount;
+            peopleList.replace(name, newAmount);
+        }
         addExpense(amount);
     }
+
 
     /* subtracts amount that was owed, delete person to owe */
     public void clearOwed(String name, int amount) {
@@ -68,7 +85,7 @@ public class User {
         System.out.println("People owed: " + Bob.getNamesOwed());
 
         System.out.println();
-        Bob.addOwed("Owen", 60);
+      /*  Bob.addOwed("Owen", 60);
         System.out.println("Expense: " + Bob.getUserTotal());
         System.out.println("People owed: " + Bob.getNamesOwed());
         
@@ -83,14 +100,14 @@ public class User {
         System.out.println("People owed: " + Bob.getNamesOwed());
 
         System.out.println();
-        Bob.clearOwed("Owen", 20);
+        Bob.clearOwed(owen, 20);
         System.out.println("Expense: " + Bob.getUserTotal());
         System.out.println("People owed: " + Bob.getNamesOwed());
 
         System.out.println();
         Bob.clearOwed("Owen", 60);
         System.out.println("Expense: " + Bob.getUserTotal());
-        System.out.println("People owed: " + Bob.getNamesOwed());
+        System.out.println("People owed: " + Bob.getNamesOwed()); */
 	
 	}
 }
