@@ -6,11 +6,14 @@ public class User {
     private String userName;
     private float moneyTotal;
     private Map<String, Float> peopleList;
+    private Map<Expense, Float> expensesOwed;
+
 
     public User(String name) {
         this.userName = name;
         this.moneyTotal = 0;
         this.peopleList = new HashMap<>();
+        this.expensesOwed = new HashMap<>();
     }
 
     /* gets user's Name */
@@ -30,11 +33,47 @@ public class User {
         return new ArrayList<>();
     }
 
+    /* gets amount owed to a paricular person */
     public float getAmountOwedtoName(String name){
         if (!peopleList.isEmpty()) {
             return peopleList.get(name);
         }
         return 0;
+    }
+
+    /*adds Expense to user list */
+    public void addExpenseToList(Expense expense, float amount) {
+        this.expensesOwed.put(expense, amount);
+    }
+
+    /*gets name of expenses user owes */
+    public List<String> getExpensesName() {
+        List<String> expenseNames = new ArrayList<>();
+        for (Expense expense : expensesOwed.keySet()) {
+            expenseNames.add(expense.getPurpose()); // Assuming `getPurpose()` returns the name or description of the expense
+        }
+        if (expensesOwed.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return expenseNames;
+
+    } 
+
+    /* gets name */
+    public float getAmountOwedForExpense(Expense expense) {
+        return expensesOwed.getOrDefault(expense, 0f);
+    }
+
+    /* gets expense by name */
+    public Expense getExpenseByName(String expenseName) {
+
+        for (Expense expense : expensesOwed.keySet()) {
+            if (expenseName == expense.getPurpose()) {
+                return expense;
+            }
+            
+        }
+        return null;
     }
 
     /* adds to total expense */

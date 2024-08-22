@@ -13,12 +13,12 @@ public class Expense {
 
     private float statusPaid;
 
-    public Expense(User user, User[] users, float amount, String purpose, String typeSplit, int month, int date) {
-        this.userPaid = user;
-        this.usersOwe = users;
+    public Expense(User userPaid, User[] usersOwe, float amount, String purpose, String typeSplit, int month, int date) {
+        this.userPaid = userPaid;
+        this.usersOwe = usersOwe;
         this.amount = amount;
         this.purpose = purpose;
-        this.partySize = 1 + users.length;
+        this.partySize = 1 + usersOwe.length;
         this.statusPaid = amount;
         this.userOwedAmounts = new HashMap<>();
         this.month = month;
@@ -26,6 +26,11 @@ public class Expense {
 
         if (typeSplit == "equal" || typeSplit == "Equal") {
             equalSplit();
+        }
+
+        userPaid.addExpenseToList(this, amount); // The user who paid the expense
+        for (User usersNeedToPay : usersOwe) {
+            usersNeedToPay.addExpenseToList(this, userOwedAmounts.get(usersNeedToPay.getName())); // Amount owed to each user
         }
 
     }

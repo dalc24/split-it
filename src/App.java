@@ -1,5 +1,7 @@
 import user.Expense;
 import user.User;
+import user.ExpensesPage.ExpensesPage;
+import user.UserHomePage.UserHomePage;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -29,10 +31,13 @@ public class App {
 
 
 
-        UserHomePage homePage = new UserHomePage(alice);
+  //      UserHomePage homePage = new UserHomePage(alice);
         
         // Call the method to create and show the window
-        homePage.createAndShowWindow();
+  //      homePage.createAndShowWindow();
+//
+        ExpensesPage expensesPage = new ExpensesPage(alice);
+        expensesPage.createAndShowWindow();
        
 /* 
         System.out.println();

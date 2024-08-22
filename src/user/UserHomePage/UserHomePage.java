@@ -1,3 +1,5 @@
+package user.UserHomePage;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -137,8 +139,8 @@ class UsersOwedBox extends JPanel {
 }
 // UserHomePage class that extends JFrame
 public class UserHomePage extends JFrame {
-    private Header header;  // Instance variable for Header
-    private JPanel userPanel;  // Panel to hold user boxes
+    private Header header; 
+    private UsersOwedBox usersOwedBoxes;
 
 
     int frameWidth = 500;   // Frame width
@@ -151,8 +153,8 @@ public class UserHomePage extends JFrame {
         // Add the header to the frame at the top (NORTH)
         this.add(header, BorderLayout.NORTH);
 
-        UsersOwedBox usersOwedBox = new UsersOwedBox(user);
-        JScrollPane scrollPane = new JScrollPane(usersOwedBox);
+        usersOwedBoxes = new UsersOwedBox(user);
+        JScrollPane scrollPane = new JScrollPane(usersOwedBoxes);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         this.add(scrollPane, BorderLayout.CENTER);
