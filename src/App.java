@@ -8,10 +8,10 @@ public class App {
         User alice = new User("Alice");
         User charlie = new User("Charlie");
         User[] participants = {alice, charlie};
-        Expense expense = new Expense(bob, participants, 150, "Dinner", "Equal");
+        Expense expense = new Expense(bob, participants, 150, "Dinner", "Equal", 6, 20);
 
         User[] participants2 = {alice, bob};
-        Expense expense2 = new Expense(charlie, participants2, 9, "Candy", "equal");
+        Expense expense2 = new Expense(charlie, participants2, 9, "Candy", "equal", 5, 20);
 
         //expense.payExpense(alice, 20);
         System.out.println("Aliie owes bob: " + alice.getAmountOwedtoName("Bob"));
@@ -21,9 +21,9 @@ public class App {
         User kate = new User("Kate");
 
         User[] participants3 = {alice, bob, robert, charlie, kate};
-        Expense rent = new Expense(sasha, participants3, 750, "rent", "equal");
+        Expense rent = new Expense(sasha, participants3, 750, "rent", "equal", 3, 20);
 
-        Expense lunch = new Expense(bob, participants, 9, "for funzies", "equal");
+        Expense lunch = new Expense(bob, participants, 9, "for funzies", "equal", 4, 20);
 
         alice.clearOwed("Sasha", 125);
 
