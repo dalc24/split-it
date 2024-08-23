@@ -8,11 +8,12 @@ import java.util.ArrayList;
 
 import user.User;
 import user.Expense;
+import user.addExpensePage.addExpensePage;
 
 class Header extends JPanel {
     Color backgroundColor = new Color(255, 255, 255); // Set background color
 
-    Header() {
+    Header(User user) {
         this.setPreferredSize(new Dimension(500, 80));
         this.setBackground(backgroundColor);
         this.setLayout(new BorderLayout());
@@ -28,6 +29,25 @@ class Header extends JPanel {
         JLabel nameText = new JLabel("Expenses");
         nameText.setFont(new Font("Serif", Font.BOLD, 32));
         titlePanel.add(nameText);
+
+        /* button settings */
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(150,10));
+        buttonPanel.setOpaque(false);
+
+        JButton addExpenseButton = new JButton("create Expense");
+        buttonPanel.add(addExpenseButton, BorderLayout.SOUTH);
+
+        addExpenseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Create and show AddExpensePage
+                addExpensePage page = new addExpensePage(user);
+                page.createAndShowWindow();
+            }
+        });
+
+        bottomPanel.add(buttonPanel, BorderLayout.EAST);
 
         bottomPanel.add(titlePanel, BorderLayout.WEST);
         this.add(bottomPanel, BorderLayout.SOUTH);
@@ -111,7 +131,7 @@ public class ExpensesPage extends JFrame { // Changed from JPanel to JFrame
     public ExpensesPage(User user) {
         this.setLayout(new BorderLayout()); // Set layout for the main panel
 
-        header = new Header();
+        header = new Header(user);
         this.add(header, BorderLayout.NORTH);
 
         expensesBox = new ExpensesBox(user);

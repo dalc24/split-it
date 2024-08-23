@@ -76,6 +76,12 @@ public class User {
         return null;
     }
 
+    /* get User by name */
+   /* public User getUserByName(String name) {
+        /* database to get all users 
+        return new User(name);
+    } */
+
     /* adds to total expense */
     public void addExpense(float amount) {
         moneyTotal += amount;
