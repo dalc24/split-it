@@ -110,6 +110,15 @@ public class addExpensePage extends JFrame {
         // Create the Expense object
         Expense expense = new Expense(userPaid, usersOwe, amount, purpose, splittingMethod, 0, 0);
 
+        System.out.println();
+        System.out.println("Purpose: " + expense.getPurpose());
+        System.out.println("User Paid: " + expense.getUserPaid());
+        System.out.println("Party Size: " + expense.getPartySize());
+        System.out.println("Expense Amount: " + expense.getExpenseAmount());
+        System.out.println("Users Involved: " + expense.getUsersInvolved());
+
+        System.out.println();
+
         JOptionPane.showMessageDialog(this, "Expense Added!"); 
 
     
