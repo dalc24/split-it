@@ -35,7 +35,7 @@ class Header extends JPanel {
 
         // Create and add a label to the panel with the username in bold and a different color
         JLabel nameText = new JLabel("<html>Hello, <span style='color:" + userNameColor + "; font-weight:bold;'>" + user.getName() + "</span>!</html>");
-        nameText.setFont(new Font("Serif", Font.PLAIN, 32));
+        nameText.setFont(nameText.getFont().deriveFont(Font.BOLD, 32));
         namePanel.add(nameText);
 
         // Create a panel to hold the label for the amount
@@ -59,7 +59,7 @@ class Header extends JPanel {
 
         // Create and add a label to the panel with the amount in color
         JLabel amountText = new JLabel("<html><span style='color:" + amountColor + "; font-weight:bold;'>$   " + userAmountTotal + "</span></html>");
-        amountText.setFont(new Font("Serif", Font.PLAIN, 32));
+        amountText.setFont(amountText.getFont().deriveFont(Font.BOLD, 32));
         amountPanel.add(amountText);
 
         // Add the namePanel to the WEST side of the bottomPanel

@@ -35,12 +35,12 @@ public class App {
       UserHomePage homePage = new UserHomePage(alice);
         
         // Call the method to create and show the window
- //       homePage.createAndShowWindow();
-//
-        ExpensesPage expensesPage = new ExpensesPage(alice);
+     //   homePage.createAndShowWindow();
+
+       ExpensesPage expensesPage = new ExpensesPage(alice);
         expensesPage.createAndShowWindow();
 
-      addExpensePage addPage = new addExpensePage(alice);
+   //   addExpensePage addPage = new addExpensePage(alice);
      // addPage.createAndShowWindow();
        
 /* 

@@ -27,7 +27,7 @@ class Header extends JPanel {
         titlePanel.setOpaque(false);
 
         JLabel nameText = new JLabel("Expenses");
-        nameText.setFont(new Font("Serif", Font.BOLD, 32));
+        nameText.setFont(nameText.getFont().deriveFont(Font.BOLD, 32));
         titlePanel.add(nameText);
 
         /* button settings */
@@ -35,7 +35,7 @@ class Header extends JPanel {
         buttonPanel.setPreferredSize(new Dimension(150,10));
         buttonPanel.setOpaque(false);
 
-        JButton addExpenseButton = new JButton("create Expense");
+        JButton addExpenseButton = new JButton("Add Expense");
         buttonPanel.add(addExpenseButton, BorderLayout.SOUTH);
 
         addExpenseButton.addActionListener(new ActionListener() {
