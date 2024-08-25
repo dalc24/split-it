@@ -1,6 +1,7 @@
 package user;
 import java.util.*;
 
+import user.FauxDB;
 
 public class User {
     private String userName;
@@ -77,10 +78,14 @@ public class User {
     }
 
     /* get User by name */
-   /* public User getUserByName(String name) {
-        /* database to get all users 
-        return new User(name);
-    } */
+    public User getUserByName(String name) {
+        // database to get all users 
+        if (FauxDB.userExists(name)) {
+            return FauxDB.getUserByName(name);
+        } else {
+            return null;
+        }
+    } 
 
     /* adds to total expense */
     public void addExpense(float amount) {
@@ -115,6 +120,7 @@ public class User {
 
         if (debtTotal == 0) {
             peopleList.remove(name);
+            
         }
         else {
             peopleList.replace(name, debtTotal);

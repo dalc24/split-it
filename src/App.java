@@ -2,31 +2,46 @@ import user.Expense;
 import user.User;
 import user.ExpensesPage.ExpensesPage;
 import user.UserHomePage.UserHomePage;
-import user.addExpensePage.addExpensePage;
+import user.FauxDB;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        User bob = new User("Bob");
-        User alice = new User("Alice");
-        User charlie = new User("Charlie");
-        User[] participants = {alice, charlie};
-        Expense expense = new Expense(bob, participants, 150, "Dinner", "Equal", 6, 20);
+      FauxDB db = new FauxDB();
 
-        User[] participants2 = {alice, bob};
-        Expense expense2 = new Expense(charlie, participants2, 9, "Candy", "equal", 5, 20);
+      User bob = new User("Bob");
+      User alice = new User("Alice");
+      User charlie = new User("Charlie");
 
-        //expense.payExpense(alice, 20);
-        System.out.println("Aliie owes bob: " + alice.getAmountOwedtoName("Bob"));
+      FauxDB.addUser(bob);
+      FauxDB.addUser(alice);
+      FauxDB.addUser(charlie);
 
-        User robert = new User("Robert");
-        User sasha = new User("Sasha");
-        User kate = new User("Kate");
+      User[] participants = {alice, charlie};
+      Expense expense = new Expense(bob, participants, 150, "Dinner", "Equal", 6, 20);
+      FauxDB.addExpense(expense);
 
-        User[] participants3 = {alice, bob, robert, charlie, kate};
-        Expense rent = new Expense(sasha, participants3, 750, "rent", "equal", 3, 20);
+      User[] participants2 = {alice, bob};
+      Expense expense2 = new Expense(charlie, participants2, 9, "Candy", "equal", 5, 20);
+      FauxDB.addExpense(expense2);
 
-        Expense lunch = new Expense(bob, participants, 9, "for funzies", "equal", 4, 20);
+      //expense.payExpense(alice, 20);
+      System.out.println("Aliie owes bob: " + alice.getAmountOwedtoName("Bob"));
+
+      User robert = new User("Robert");
+      User sasha = new User("Sasha");
+      User kate = new User("Kate");
+      
+      FauxDB.addUser(robert);
+      FauxDB.addUser(sasha);
+      FauxDB.addUser(kate);
+
+      User[] participants3 = {alice, bob, robert, charlie, kate};
+      Expense rent = new Expense(sasha, participants3, 750, "rent", "equal", 3, 20);
+      FauxDB.addExpense(rent);
+
+      Expense lunch = new Expense(bob, participants, 9, "for funzies", "equal", 4, 20);
+      FauxDB.addExpense(lunch);
 
       //  alice.clearOwed("Sasha", 125);
 

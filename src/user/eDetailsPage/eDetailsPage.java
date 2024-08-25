@@ -2,6 +2,7 @@ package user.eDetailsPage;
 import user.User;
 import user.Expense;
 import user.ExpensesPage.ExpensesPage;
+import user.payExpensePage.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -189,7 +190,15 @@ public class eDetailsPage extends JFrame{
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         JButton payButton = new JButton("Pay Expense");
-       // submitButton.addActionListener(e -> createExpense());
+        // Add a MouseListener to make the panel clickable
+        payButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Show details in a popup when the panel is clicked
+                payExpensePage page = new payExpensePage(expense);
+                page.createAndShowWindow();
+            }
+        });
 
         mainPanel.add(Box.createVerticalStrut(70)); // Adds space vertically
         mainPanel.add(expenseNamePanel);

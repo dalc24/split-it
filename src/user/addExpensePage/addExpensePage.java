@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import user.User;
 import user.Expense;
+import user.FauxDB;
 
 
 class purposePane extends JPanel {
@@ -289,6 +290,7 @@ public class addExpensePage extends JFrame {
 
         // create expense object
         Expense expense = new Expense(userPaid, usersOwe, amount, purpose, splittingMethod, 0, 0);
+        FauxDB.addExpense(expense);
 
         System.out.println();
         System.out.println("Purpose: " + expense.getPurpose());
@@ -297,9 +299,10 @@ public class addExpensePage extends JFrame {
         System.out.println("Expense Amount: " + expense.getExpenseAmount());
         System.out.println("Users Involved: " + expense.getUsersInvolved());
 
-        System.out.println();
+        System.out.println(FauxDB.getAllExpenses());
 
         JOptionPane.showMessageDialog(this, "Expense Added!"); 
+
 
         // close frame
         dispose(); 
