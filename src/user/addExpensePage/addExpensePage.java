@@ -1,17 +1,10 @@
 package user.addExpensePage;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.util.List;
-import java.util.ArrayList;
-import javax.swing.border.EmptyBorder;
-
-
 
 import user.User;
 import user.Expense;
-import user.addExpensePage.*;
 
 
 class purposePane extends JPanel {

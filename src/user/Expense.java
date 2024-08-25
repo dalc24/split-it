@@ -10,10 +10,11 @@ public class Expense {
     private Map<String, Float> userOwedAmounts;
     private int month;
     private int date;
+    private String splitType;
 
     private float statusPaid;
 
-    public Expense(User userPaid, User[] usersOwe, float amount, String purpose, String typeSplit, int month, int date) {
+    public Expense(User userPaid, User[] usersOwe, float amount, String purpose, String splitType, int month, int date) {
         this.userPaid = userPaid;
         this.usersOwe = usersOwe;
         this.amount = amount;
@@ -23,8 +24,9 @@ public class Expense {
         this.userOwedAmounts = new HashMap<>();
         this.month = month;
         this.date = date;
+        this.splitType = splitType;
 
-        if (typeSplit == "equal" || typeSplit == "Equal") {
+        if (splitType == "equal" || splitType == "Equal") {
             equalSplit();
         }
 
@@ -49,6 +51,10 @@ public class Expense {
 
     public float getMonth() {
         return month;
+    }
+
+    public String getSplitType() {
+        return splitType;
     }
 
     public float getDate() throws Exception {
