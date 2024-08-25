@@ -140,6 +140,8 @@ public class payExpensePage extends JFrame {
         User user = FauxDB.getUserByName(userName);
         expense.payExpense(user, amount);
 
+        JOptionPane.showMessageDialog(this, "Paid Expense!"); 
+
     }
 
 

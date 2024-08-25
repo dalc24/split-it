@@ -43,6 +43,8 @@ public class App {
       Expense lunch = new Expense(bob, participants, 9, "for funzies", "equal", 4, 20);
       FauxDB.addExpense(lunch);
 
+      System.out.println(FauxDB.getAllExpenses());
+
       //  alice.clearOwed("Sasha", 125);
 
 

@@ -118,7 +118,7 @@ public class Expense {
         statusPaid -= amount;
 
         //edits to User
-        user.clearOwed(user.getName(), amount);
+        user.clearOwed(userPaid.getName(), amount);
         
     }
 
