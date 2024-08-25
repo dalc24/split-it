@@ -261,7 +261,6 @@ public class addExpensePage extends JFrame {
         String purpose = purposePanel.getPurposeText();
         float amount = payPanel.getAmountText();
         String splittingMethod = payPanel.getSplitType();
-       // splittingMethod = "Equal";
 
         String payerName = paidByPanel.getPaidByText();
 
@@ -280,8 +279,6 @@ public class addExpensePage extends JFrame {
         if (!participantsPanel.getParticipant4().isEmpty()) {
             participantNames[partySize++] = participantsPanel.getParticipant4();
         }
-        
-
 
         // Retrieve or create User objects (depends )
         User userPaid = getUserByName(payerName);
@@ -303,6 +300,9 @@ public class addExpensePage extends JFrame {
         System.out.println();
 
         JOptionPane.showMessageDialog(this, "Expense Added!"); 
+
+        // close frame
+        dispose(); 
     } 
 
 

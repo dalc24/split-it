@@ -6,8 +6,7 @@ import user.ExpensesPage.ExpensesPage;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.List;
-import java.util.ArrayList;
+
 import java.util.*;  
 
 
@@ -169,7 +168,7 @@ class ParticipantPanel extends JPanel {
 public class eDetailsPage extends JFrame{
 
     int frameWidth = 500;   // Frame width
-    int frameHeight = 600;  // Frame height
+    int frameHeight = 650;  // Frame height
 
     private ExpenseNamePanel expenseNamePanel;
     private PayPanel payPanel;
@@ -189,17 +188,24 @@ public class eDetailsPage extends JFrame{
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
+        JButton payButton = new JButton("Pay Expense");
+       // submitButton.addActionListener(e -> createExpense());
+
         mainPanel.add(Box.createVerticalStrut(70)); // Adds space vertically
         mainPanel.add(expenseNamePanel);
         mainPanel.add(Box.createVerticalStrut(30)); // Adds space vertically
         mainPanel.add(payPanel);
         mainPanel.add(participantPanel);
+        mainPanel.add(payButton); 
+
 
 
         // Ensure panels are centered in the main frame
         expenseNamePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         payPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         participantPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        payButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
 
         add(mainPanel);
         setVisible(true);

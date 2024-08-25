@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import user.User;
 import user.Expense;
 import user.addExpensePage.addExpensePage;
+import user.eDetailsPage.eDetailsPage;
 
 class Header extends JPanel {
     Color backgroundColor = new Color(255, 255, 255); // Set background color
@@ -105,12 +106,8 @@ class ExpensesBox extends JPanel {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     // Show details in a popup when the panel is clicked
-                    JOptionPane.showMessageDialog(
-                        expensePanel,
-                        "Details for " + expenseName + ":\nAmount Owed: $" + amountOwed,
-                        "Details for " + expenseName,
-                        JOptionPane.INFORMATION_MESSAGE
-                    );
+                    eDetailsPage page = new eDetailsPage(expense);
+                    page.createAndShowWindow();
                 }
             });
 
