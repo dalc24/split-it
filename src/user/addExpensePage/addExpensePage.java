@@ -6,6 +6,7 @@ import java.util.*;
 
 
 import user.User;
+import user.ExpensesPage.ExpenseAddedListener;
 import user.ExpensesPage.ExpensesPage;
 import user.Expense;
 import user.FauxDB;
@@ -213,6 +214,7 @@ public class addExpensePage extends JFrame {
     
     private ExpensesPage expensesPage;
     private User user;
+    private ExpenseAddedListener listener;
 
     private purposePane purposePanel;
     private payPanel payPanel;
@@ -220,8 +222,9 @@ public class addExpensePage extends JFrame {
     private participantsPanel participantsPanel;
 
 
-    public addExpensePage(User user) {
+    public addExpensePage(User user, ExpenseAddedListener listener) {
         this.user = user;
+        this.listener = listener;
 
         setTitle("Expense");
         setSize(frameWidth, frameHeight);
@@ -318,6 +321,10 @@ public class addExpensePage extends JFrame {
         }
 
         JOptionPane.showMessageDialog(this, "Expense Added!"); 
+
+        if (listener != null) {
+            listener.onExpenseAdded(expense);
+        }
 
         // close frame
         dispose();

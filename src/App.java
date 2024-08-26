@@ -43,7 +43,9 @@ public class App {
       Expense lunch = new Expense(bob, participants, 9, "for funzies", "equal", 4, 20);
       FauxDB.addExpense(lunch);
 
-      System.out.println(FauxDB.getAllExpenses());
+      System.out.println("Alice's expenses: " + alice.getExpensesName());
+
+   //   System.out.println(FauxDB.getAllExpenses());
 
       //  alice.clearOwed("Sasha", 125);
 
@@ -59,6 +61,8 @@ public class App {
 
    //   addExpensePage addPage = new addExpensePage(alice);
      // addPage.createAndShowWindow();
+
+
        
 /* 
         System.out.println();
