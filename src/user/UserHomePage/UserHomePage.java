@@ -52,10 +52,10 @@ class Header extends JPanel {
 
         if (userAmountTotal > 0) {
             amountColor = negativeAmount;
+            userAmountTotal *= -1;
         } else {
             amountColor = positiveAmount;
         }
-        userAmountTotal *= -1;
 
         // Create and add a label to the panel with the amount in color
         JLabel amountText = new JLabel("<html><span style='color:" + amountColor + "; font-weight:bold;'>$   " + userAmountTotal + "</span></html>");

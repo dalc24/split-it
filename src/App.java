@@ -49,14 +49,17 @@ public class App {
 
       //  alice.clearOwed("Sasha", 125);
 
+      User barbie = new User("Barbie");
+      FauxDB.addUser(barbie);
 
 
-      UserHomePage homePage = new UserHomePage(alice);
+
+      UserHomePage homePage = new UserHomePage(barbie);
         
         // Call the method to create and show the window
-     //   homePage.createAndShowWindow();
+       // homePage.createAndShowWindow();
 
-       ExpensesPage expensesPage = new ExpensesPage(alice);
+       ExpensesPage expensesPage = new ExpensesPage(barbie);
         expensesPage.createAndShowWindow();
 
    //   addExpensePage addPage = new addExpensePage(alice);

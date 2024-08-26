@@ -110,9 +110,12 @@ class payPanel extends JPanel {
 }
 
 class paidByPanel extends JPanel {
-    private JTextField paidByField;
+    private JComboBox<String> paidByField;
+    private User user;
 
-    public paidByPanel() {
+    public paidByPanel(User user) {
+
+        this.user = user;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(380, 60)); 
@@ -125,7 +128,9 @@ class paidByPanel extends JPanel {
         paidByLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         //text box
-        paidByField = new JTextField(20);
+        paidByField = new JComboBox<>(new String[]{user.getName()});
+        paidByField.setMaximumSize(new Dimension(Integer.MAX_VALUE, paidByField.getPreferredSize().height));
+
         paidByField.setPreferredSize(new Dimension(300, 30)); 
         paidByField.setMinimumSize(new Dimension(300, 30)); 
         paidByField.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -139,7 +144,8 @@ class paidByPanel extends JPanel {
     }
 
     public String getPaidByText() {
-        return paidByField.getText();
+        String name = (String) paidByField.getSelectedItem();
+        return name;
     }
 }
 
@@ -234,7 +240,7 @@ public class addExpensePage extends JFrame {
         // Initialize panels
         purposePanel = new purposePane();
         payPanel = new payPanel();
-        paidByPanel = new paidByPanel();
+        paidByPanel = new paidByPanel(user);
         participantsPanel = new participantsPanel();
 
 
@@ -252,7 +258,7 @@ public class addExpensePage extends JFrame {
         mainPanel.add(payPanel);
         mainPanel.add(Box.createVerticalStrut(10)); // adds space vertically
         mainPanel.add(paidByPanel);
-        mainPanel.add(Box.createVerticalStrut(25)); // adds space vertically
+        mainPanel.add(Box.createVerticalStrut(15)); // adds space vertically
         mainPanel.add(participantsPanel);
         mainPanel.add(Box.createVerticalStrut(25)); //adds space vertically
         mainPanel.add(submitButton); 
