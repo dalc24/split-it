@@ -7,6 +7,7 @@ import java.util.ArrayList; // Import ArrayList
 
 
 import user.User;
+import MainApplication.MainApplication;
 
 
 
@@ -138,7 +139,7 @@ class UsersOwedBox extends JPanel {
 
 }
 // UserHomePage class that extends JFrame
-public class UserHomePage extends JFrame {
+public class UserHomePage extends JPanel {
     private Header header; 
     private UsersOwedBox usersOwedBoxes;
 
@@ -147,59 +148,25 @@ public class UserHomePage extends JFrame {
     int frameHeight = 800;  // Frame height
 
     // Constructor for UserHomePage
-    public UserHomePage(User user) {
-        // Initialize the header with the User object
-        header = new Header(user);
-        // Add the header to the frame at the top (NORTH)
-        this.add(header, BorderLayout.NORTH);
 
+    public UserHomePage(User user, MainApplication app) {
+        this.setLayout(new BorderLayout()); // Set the layout to BorderLayout
+    
+        header = new Header(user);
+        this.add(header, BorderLayout.NORTH); 
+    
         usersOwedBoxes = new UsersOwedBox(user);
         JScrollPane scrollPane = new JScrollPane(usersOwedBoxes);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-        this.add(scrollPane, BorderLayout.CENTER);
-
-
-
-
-
-
-
-
-
-
-        // Set default close operation and size of the frame
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.add(scrollPane, BorderLayout.CENTER); 
+    
+        JButton button = new JButton("Expenses");
+        button.addActionListener(e -> app.showPage("ExpensesPage"));
+        this.add(button, BorderLayout.SOUTH); 
+    
         this.setSize(frameWidth, frameHeight);
-
-
-
-
-
-
-
-
-
-
-        /* for button "click me" */
-        // Create a panel to hold additional components
-        JPanel buttonPanel = new JPanel();
-
-        // Create a button with text "Click Me!"
-        JButton button = new JButton("Click Me!");
-
-        // Add an action listener to the button
-        button.addActionListener(e -> {
-            // Show a message dialog when the button is clicked
-            JOptionPane.showMessageDialog(this, "Button Clicked!");
-        });
-
-        // Add the button to the panel
-        buttonPanel.add(button);
-
-        // Add the button panel to the frame (SOUTH)
-        this.add(buttonPanel, BorderLayout.SOUTH);
     }
+    
 
     public void createAndShowWindow() {
         // Make the window visible

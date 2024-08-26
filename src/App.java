@@ -4,6 +4,8 @@ import user.ExpensesPage.ExpensesPage;
 import user.UserHomePage.UserHomePage;
 import user.FauxDB;
 
+import MainApplication.*;
+
 public class App {
     public static void main(String[] args) throws Exception {
 
@@ -52,18 +54,35 @@ public class App {
       User barbie = new User("Barbie");
       FauxDB.addUser(barbie);
 
+      //MainApplication mainApp = new MainApplication(alice);
+      //mainApp.showPage();
 
 
-      UserHomePage homePage = new UserHomePage(barbie);
+
+
+    //  UserHomePage homePage = new UserHomePage(barbie);
         
         // Call the method to create and show the window
        // homePage.createAndShowWindow();
 
-       ExpensesPage expensesPage = new ExpensesPage(barbie);
-        expensesPage.createAndShowWindow();
+      // ExpensesPage expensesPage = new ExpensesPage(barbie);
+       // expensesPage.createAndShowWindow();
 
    //   addExpensePage addPage = new addExpensePage(alice);
      // addPage.createAndShowWindow();
+
+     User user = new User("username"); // Assuming you have a User class with a constructor
+     FauxDB.addUser(user);
+     
+
+     // Initialize and display the main application with the user
+     MainApplication mainApp = new MainApplication(user);
+     mainApp.setVisible(true);
+   //  UserHomePage homePage = new UserHomePage(alice, mainApp);
+   //  homePage.createAndShowWindow();
+
+
+
 
 
        

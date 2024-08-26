@@ -139,7 +139,12 @@ public class payExpensePage extends JFrame {
         float amount = payPanel.getAmountText();
 
         User user = FauxDB.getUserByName(userName);
-        expense.payExpense(user, amount);
+        if (user == null) {
+            System.out.println("Doesn't exist in DB");
+        }
+        else {
+            expense.payExpense(user, amount);
+        }
 
         JOptionPane.showMessageDialog(this, "Paid Expense!"); 
 

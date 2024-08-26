@@ -10,6 +10,7 @@ import user.User;
 import user.Expense;
 import user.addExpensePage.addExpensePage;
 import user.eDetailsPage.eDetailsPage;
+import MainApplication.MainApplication;
 
 class Header extends JPanel {
     Color backgroundColor = new Color(255, 255, 255); // Set background color
@@ -137,7 +138,6 @@ class ExpensesBox extends JPanel {
         expensePanel.setBackground(Color.WHITE); // Background color for individual entry
         expensePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Border for individual entry
 
-        // Use BoxLayout to ensure the panel respects the preferred size
         expensePanel.setLayout(new BoxLayout(expensePanel, BoxLayout.X_AXIS));
         expensePanel.setPreferredSize(new Dimension(460, 40)); // Adjust height here
         expensePanel.setMaximumSize(new Dimension(460, 40)); // Ensures height doesn't exceed this
@@ -186,7 +186,7 @@ class ExpensesBox extends JPanel {
 
 }
 
-public class ExpensesPage extends JFrame implements ExpenseAddedListener{
+public class ExpensesPage extends JPanel implements ExpenseAddedListener{
     private Header header;
     private ExpensesBox expensesBox;
     private User user; // Store the user for accessing their expenses
@@ -194,7 +194,7 @@ public class ExpensesPage extends JFrame implements ExpenseAddedListener{
     int frameWidth = 500;   // Frame width
     int frameHeight = 800;  // Frame height
 
-    public ExpensesPage(User user) {
+    public ExpensesPage(User user, MainApplication app) {
         this.user = user; // Initialize the user
         this.setLayout(new BorderLayout()); // Set layout for the main panel
 
@@ -206,14 +206,12 @@ public class ExpensesPage extends JFrame implements ExpenseAddedListener{
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         this.add(scrollPane, BorderLayout.CENTER);
-/*
-        JPanel buttonPanel = new JPanel();
-        JButton button = new JButton("Click Me!");
-        button.addActionListener(e -> JOptionPane.showMessageDialog(this, "Button Clicked!"));
-        buttonPanel.add(button);
-        this.add(buttonPanel, BorderLayout.SOUTH); */
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton button = new JButton("Home");
+        button.addActionListener(e -> app.showPage("UserHomePage"));
+        this.add(button, BorderLayout.SOUTH);
+
+       // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(frameWidth, frameHeight);
     }
     @Override
@@ -224,6 +222,11 @@ public class ExpensesPage extends JFrame implements ExpenseAddedListener{
 
     public void createAndShowWindow() {
         this.setVisible(true);
+    }
+    @Override
+    public void onExpensePaid(Expense expense) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'onExpensePaid'");
     }
 }
 
