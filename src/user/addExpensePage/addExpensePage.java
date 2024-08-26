@@ -6,6 +6,7 @@ import java.util.*;
 
 
 import user.User;
+import user.ExpensesPage.ExpensesPage;
 import user.Expense;
 import user.FauxDB;
 
@@ -209,6 +210,9 @@ public class addExpensePage extends JFrame {
 
     int frameWidth = 500;   // Frame width
     int frameHeight = 600;  // Frame height
+    
+    private ExpensesPage expensesPage;
+    private User user;
 
     private purposePane purposePanel;
     private payPanel payPanel;
@@ -217,6 +221,7 @@ public class addExpensePage extends JFrame {
 
 
     public addExpensePage(User user) {
+        this.user = user;
 
         setTitle("Expense");
         setSize(frameWidth, frameHeight);
@@ -314,9 +319,8 @@ public class addExpensePage extends JFrame {
 
         JOptionPane.showMessageDialog(this, "Expense Added!"); 
 
-
         // close frame
-        dispose(); 
+        dispose();
     } 
 
 

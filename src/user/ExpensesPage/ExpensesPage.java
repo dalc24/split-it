@@ -13,8 +13,11 @@ import user.eDetailsPage.eDetailsPage;
 
 class Header extends JPanel {
     Color backgroundColor = new Color(255, 255, 255); // Set background color
+    private ExpensesPage expensesPage; // Reference to ExpensesPage
 
-    Header(User user) {
+    Header(User user, ExpensesPage expensesPage) {
+        this.expensesPage = expensesPage;
+
         this.setPreferredSize(new Dimension(500, 80));
         this.setBackground(backgroundColor);
         this.setLayout(new BorderLayout());
@@ -92,7 +95,11 @@ class ExpensesBox extends JPanel {
             // Create a label for the amount owed
             JLabel amountLabel = new JLabel("$" + amountOwed);
             amountLabel.setFont(new Font("Arial", Font.BOLD, 16));
-            amountLabel.setForeground(Color.RED); // Make the amount red to stand out
+            if (expense.isExpensePaid()) {
+                amountLabel.setForeground(Color.GREEN); // Make the amount red to stand out
+            } else {
+                amountLabel.setForeground(Color.RED); // Make the amount red to stand out
+            }
 
             // Add the name and amount labels to the person panel
             expensePanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add padding to the left
@@ -118,17 +125,19 @@ class ExpensesBox extends JPanel {
     }
 }
 
-public class ExpensesPage extends JFrame { // Changed from JPanel to JFrame
+public class ExpensesPage extends JFrame {
     private Header header;
     private ExpensesBox expensesBox;
+    private User user; // Store the user for accessing their expenses
 
     int frameWidth = 500;   // Frame width
     int frameHeight = 800;  // Frame height
 
     public ExpensesPage(User user) {
+        this.user = user; // Initialize the user
         this.setLayout(new BorderLayout()); // Set layout for the main panel
 
-        header = new Header(user);
+        header = new Header(user, this); // Pass the current ExpensesPage instance
         this.add(header, BorderLayout.NORTH);
 
         expensesBox = new ExpensesBox(user);
@@ -137,39 +146,18 @@ public class ExpensesPage extends JFrame { // Changed from JPanel to JFrame
 
         this.add(scrollPane, BorderLayout.CENTER);
 
-
-
-
-
-
-
-
-
-
-        // Set default close operation and size of the frame
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(frameWidth, frameHeight);
-
-
-
         JPanel buttonPanel = new JPanel();
-
         JButton button = new JButton("Click Me!");
-
-        button.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Button Clicked!");
-        });
-
+        button.addActionListener(e -> JOptionPane.showMessageDialog(this, "Button Clicked!"));
         buttonPanel.add(button);
         this.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Set default close operation and size of the frame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(frameWidth, frameHeight);
     }
 
     public void createAndShowWindow() {
-        // Make the window visible
         this.setVisible(true);
     }
 }
+

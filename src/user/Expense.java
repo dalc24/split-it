@@ -11,6 +11,7 @@ public class Expense {
     private int month;
     private int date;
     private String splitType;
+    private boolean isPaid;
 
     private float statusPaid;
 
@@ -25,6 +26,7 @@ public class Expense {
         this.month = month;
         this.date = date;
         this.splitType = splitType;
+        this.isPaid = false;
 
         if (splitType == "equal" || splitType == "Equal") {
             equalSplit();
@@ -114,6 +116,10 @@ public class Expense {
         float userOwes = userOwedAmounts.get(user.getName());
         userOwes -= amount;
 
+        if (userOwes == 0) {
+            userOwes *= -1;
+        }
+
         userOwedAmounts.replace(user.getName(), userOwes);
         statusPaid -= amount;
 
@@ -124,6 +130,7 @@ public class Expense {
 
     public boolean isExpensePaid() {
         if (statusPaid == 0) {
+            isPaid = true;
             return true;
         }
         return false;

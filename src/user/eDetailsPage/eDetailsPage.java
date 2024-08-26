@@ -166,7 +166,7 @@ class ParticipantPanel extends JPanel {
     }
 }
 
-public class eDetailsPage extends JFrame{
+public class eDetailsPage extends JFrame implements ExpenseUpdateListener{
 
     int frameWidth = 500;   // Frame width
     int frameHeight = 650;  // Frame height
@@ -194,8 +194,7 @@ public class eDetailsPage extends JFrame{
         payButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Show details in a popup when the panel is clicked
-                payExpensePage page = new payExpensePage(expense);
+                payExpensePage page = new payExpensePage(expense, eDetailsPage.this);
                 page.createAndShowWindow();
             }
         });
@@ -219,6 +218,48 @@ public class eDetailsPage extends JFrame{
         add(mainPanel);
         setVisible(true);
 
+    }
+    @Override
+    public void updateExpense(Expense updatedExpense) {
+        // Update the expense details in the panels
+        expenseNamePanel = new ExpenseNamePanel(updatedExpense);
+        payPanel = new PayPanel(updatedExpense);
+        participantPanel = new ParticipantPanel(updatedExpense);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        JButton payButton = new JButton("Pay Expense");
+        // Add a MouseListener to make the panel clickable
+        payButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                payExpensePage page = new payExpensePage(updatedExpense, eDetailsPage.this);
+                page.createAndShowWindow();
+            }
+        });
+
+        mainPanel.add(Box.createVerticalStrut(70)); // Adds space vertically
+        mainPanel.add(expenseNamePanel);
+        mainPanel.add(Box.createVerticalStrut(30)); // Adds space vertically
+        mainPanel.add(payPanel);
+        mainPanel.add(participantPanel);
+        mainPanel.add(payButton); 
+
+
+
+        // Ensure panels are centered in the main frame
+        expenseNamePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        payPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        participantPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        payButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+
+        // Update the frame with the new panel
+        this.getContentPane().removeAll();
+        this.add(mainPanel);
+        this.revalidate();
+        this.repaint();
     }
 
     public void createAndShowWindow() {

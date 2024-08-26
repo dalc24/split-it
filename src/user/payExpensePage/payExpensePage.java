@@ -1,9 +1,8 @@
 package user.payExpensePage;
 
-import user.Expense;
-import user.FauxDB;
-import user.User;
-import user.Expense;
+
+import user.*;
+import user.eDetailsPage.ExpenseUpdateListener;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -97,8 +96,10 @@ public class payExpensePage extends JFrame {
 
     private ExpenseNamePanel expenseNamePanel;
     private PayPanel payPanel;
+    private ExpenseUpdateListener listener;
 
-    public payExpensePage(Expense expense) {
+    public payExpensePage(Expense expense, ExpenseUpdateListener listener) {
+        this.listener = listener;
 
         setTitle("Pay Expense");
         setSize(frameWidth, frameHeight);
@@ -142,6 +143,13 @@ public class payExpensePage extends JFrame {
 
         JOptionPane.showMessageDialog(this, "Paid Expense!"); 
 
+        // Notify the listener (eDetailsPage) about the update
+        if (listener != null) {
+            listener.updateExpense(expense);
+        }
+
+        dispose();
+
     }
 
 
@@ -159,9 +167,5 @@ public class payExpensePage extends JFrame {
         User ean = new User("Ean");
         User[] participants = {alice, charlie, dertha, ean};
         Expense expense = new Expense(bob, participants, 150, "Dinner", "Equal", 6, 20);
-
-       payExpensePage dp = new payExpensePage(expense);
-       dp.createAndShowWindow();;
-
     }
 }
