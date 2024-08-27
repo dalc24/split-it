@@ -309,22 +309,7 @@ public class addExpensePage extends JFrame {
         // create expense object
         Expense expense = new Expense(userPaid, usersOwe, amount, purpose, splittingMethod, 0, 0);
         FauxDB.addExpense(expense);
-
-        System.out.println();
-        System.out.println("Purpose: " + expense.getPurpose());
-        System.out.println("User Paid: " + expense.getUserPaid());
-        System.out.println("Party Size: " + expense.getPartySize());
-        System.out.println("Expense Amount: " + expense.getExpenseAmount());
-        System.out.println("Users Involved: " + expense.getUsersInvolved());
-        // Print all expenses in the FauxDB
-        System.out.println("All Expenses in FauxDB:");
-        for (Expense e : FauxDB.getAllExpenses()) {
-            System.out.println("Purpose: " + e.getPurpose());
-            System.out.println("User Paid: " + e.getUserPaid());
-            System.out.println("Amount: " + e.getExpenseAmount());
-            System.out.println("Split Type: " + e.getSplitType());
-            System.out.println("Participants: " + (e.getUsersInvolved())); // Adjust according to your Expense class
-        }
+        user.addExpenseToList(expense, amount);
 
         JOptionPane.showMessageDialog(this, "Expense Added!"); 
 

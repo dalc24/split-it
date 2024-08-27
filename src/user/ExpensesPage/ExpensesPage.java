@@ -58,132 +58,76 @@ class Header extends JPanel {
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
 }
-
 class ExpensesBox extends JPanel {
-
-    private List<Expense> expenses;
     private User user;
+    ExpensesPage ePage;
 
-    ExpensesBox(User user) {
+    ExpensesBox(User user, ExpensesPage ePage) {
+        this.ePage = ePage;
         this.user = user;
-        // Set layout and properties for this panel
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Vertical box layout
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding
         this.setBackground(Color.LIGHT_GRAY); // Background color for the entire container
         loadExpenses();
-
     }
 
     private void loadExpenses() {
-        // Get names of users owed money
+        this.removeAll(); // Clear any existing components before loading new ones
+
         List<String> expensesOwed = user.getExpensesName();
 
-        // Iterate over expense name and create a box
         for (String expenseName : expensesOwed) {
-
             Expense expense = user.getExpenseByName(expenseName);
 
-            // Create a panel for each owed person
-            JPanel expensePanel = new JPanel();
-            expensePanel.setBackground(Color.WHITE); // Background color for individual entry
-            expensePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Border for individual entry
-
-            // Use BoxLayout to ensure the panel respects the preferred size
-            expensePanel.setLayout(new BoxLayout(expensePanel, BoxLayout.X_AXIS));
-            expensePanel.setPreferredSize(new Dimension(460, 40)); // Adjust height here
-            expensePanel.setMaximumSize(new Dimension(460, 40)); // Ensures height doesn't exceed this
-
-            // Get the amount owed to this person
-            
-            float amountOwed = expense.getExpenseAmount();
-
-            // Create a label for the name
-            JLabel expenseLabel = new JLabel(expenseName);
-            expenseLabel.setFont(new Font("Arial", Font.PLAIN, 16)); // Adjust font size if needed
-
-            // Create a label for the amount owed
-            JLabel amountLabel = new JLabel("$" + amountOwed);
-            amountLabel.setFont(new Font("Arial", Font.BOLD, 16));
             if (expense.isExpensePaid()) {
-                amountLabel.setForeground(Color.GREEN); // Make the amount red to stand out
-            } else {
-                amountLabel.setForeground(Color.RED); // Make the amount red to stand out
+                continue; // Skip paid expenses
             }
 
-            // Add the name and amount labels to the person panel
-            expensePanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add padding to the left
-            expensePanel.add(expenseLabel);
-            expensePanel.add(Box.createHorizontalGlue()); // Pushes the amount label to the right
-            expensePanel.add(amountLabel);
-            expensePanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add padding to the right
-
-            // Add a MouseListener to make the panel clickable
-            expensePanel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    // Show details in a popup when the panel is clicked
-                    eDetailsPage page = new eDetailsPage(expense);
-                    page.createAndShowWindow();
-                }
-            });
-
-            // Add the person panel to the main panel
+            JPanel expensePanel = createExpensePanel(expense, ePage);
             this.add(expensePanel);
             this.add(Box.createVerticalStrut(5)); // Add small spacing between boxes
         }
+
+        this.revalidate(); // Revalidate the panel after adding components
+        this.repaint(); // Repaint to reflect changes
     }
 
-    public void addExpense(Expense expense) {
+    public JPanel createExpensePanel(Expense expense, ExpensesPage ePage) {
         JPanel expensePanel = new JPanel();
-        expensePanel.setBackground(Color.WHITE); // Background color for individual entry
-        expensePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Border for individual entry
-
+        expensePanel.setBackground(Color.WHITE);
+        expensePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         expensePanel.setLayout(new BoxLayout(expensePanel, BoxLayout.X_AXIS));
-        expensePanel.setPreferredSize(new Dimension(460, 40)); // Adjust height here
-        expensePanel.setMaximumSize(new Dimension(460, 40)); // Ensures height doesn't exceed this
+        expensePanel.setPreferredSize(new Dimension(460, 40));
+        expensePanel.setMaximumSize(new Dimension(460, 40));
 
-        // Get the amount owed to this person
-        
-        float amountOwed = expense.getExpenseAmount();
-
-        // Create a label for the name
         JLabel expenseLabel = new JLabel(expense.getPurpose());
-        expenseLabel.setFont(new Font("Arial", Font.PLAIN, 16)); // Adjust font size if needed
+        expenseLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        // Create a label for the amount owed
-        JLabel amountLabel = new JLabel("$" + amountOwed);
+        JLabel amountLabel = new JLabel("$" + expense.getExpenseAmount());
         amountLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        if (expense.isExpensePaid()) {
-            amountLabel.setForeground(Color.GREEN); // Make the amount red to stand out
-        } else {
-            amountLabel.setForeground(Color.RED); // Make the amount red to stand out
-        }
+        amountLabel.setForeground(Color.RED);
 
-        // Add the name and amount labels to the person panel
-        expensePanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add padding to the left
+        expensePanel.add(Box.createRigidArea(new Dimension(10, 0)));
         expensePanel.add(expenseLabel);
-        expensePanel.add(Box.createHorizontalGlue()); // Pushes the amount label to the right
+        expensePanel.add(Box.createHorizontalGlue());
         expensePanel.add(amountLabel);
-        expensePanel.add(Box.createRigidArea(new Dimension(10, 0))); // Add padding to the right
+        expensePanel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-        // Add a MouseListener to make the panel clickable
         expensePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Show details in a popup when the panel is clicked
                 eDetailsPage page = new eDetailsPage(expense);
                 page.createAndShowWindow();
             }
         });
 
-        // Add the person panel to the main panel
-        this.add(expensePanel);
-        this.add(Box.createVerticalStrut(5)); // Add small spacing between boxes
-
-        this.revalidate();
-        this.repaint();
+        return expensePanel;
     }
 
+    // Call this method to refresh the box when an expense is added or paid
+    public void refreshExpenses() {
+        loadExpenses();
+    }
 }
 
 public class ExpensesPage extends JPanel implements ExpenseAddedListener{
@@ -201,7 +145,7 @@ public class ExpensesPage extends JPanel implements ExpenseAddedListener{
         header = new Header(user, this); // Pass the current ExpensesPage instance
         this.add(header, BorderLayout.NORTH);
 
-        expensesBox = new ExpensesBox(user);
+        expensesBox = new ExpensesBox(user, this);
         JScrollPane scrollPane = new JScrollPane(expensesBox);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -215,18 +159,14 @@ public class ExpensesPage extends JPanel implements ExpenseAddedListener{
         this.setSize(frameWidth, frameHeight);
     }
     @Override
-    public void onExpenseAdded(Expense newExpense) {
-       expensesBox.addExpense(newExpense);
-
+    public void onExpenseAdded(Expense expense) {
+        System.out.println();
+        System.out.println("Expense added: " + expense.getPurpose()); // Debugging
+        expensesBox.refreshExpenses();; // Refresh the expense list when a new expense is added
     }
 
     public void createAndShowWindow() {
         this.setVisible(true);
-    }
-    @Override
-    public void onExpensePaid(Expense expense) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onExpensePaid'");
     }
 }
 
